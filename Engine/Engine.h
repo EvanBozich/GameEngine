@@ -3,6 +3,7 @@
 #include "Random.h"
 #include "Vector2.h"
 #include "Input.h"
+#include "GameTime.h"
 #include <vector>
 #include <iostream>
 #include <string>
