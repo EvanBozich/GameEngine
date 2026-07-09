@@ -2,7 +2,7 @@
 #include "GameTime.h"
 #include <SDL3/SDL.h>
 
-void nu::Time::Tick()
+ nu::Time::Time()
 {
 	Reset();
 }

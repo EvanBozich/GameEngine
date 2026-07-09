@@ -4,6 +4,7 @@
 #include "Vector2.h"
 #include "Input.h"
 #include "GameTime.h"
+#include "MathUtil.h"
 #include <vector>
 #include <iostream>
 #include <string>
