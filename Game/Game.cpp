@@ -116,7 +116,7 @@ int main()
 
                 nu::Vector2 v = points.back() - input.GetMousePosition();
 
-                if (v.Length() > 30.0f)
+                if (v.Length() > 10.0f)
                 {
                     points.push_back(input.GetMousePosition());
                 }
@@ -147,7 +147,7 @@ int main()
         renderer.SetColorInt(0,0,0);
         renderer.Clear();
 
-        for (int i = 0; i < points.size(); i++) 
+        for (int i = 0; i < (int)points.size() -1 ; i++) 
         {
             renderer.SetColorFloat(nu::Randomfloat(), nu::Randomfloat(), nu::Randomfloat());
             renderer.DrawLine(points[i].x, points[i].y, (points[i + 1].x - 1),(points[i + 1].y - 1));
