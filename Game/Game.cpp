@@ -2,45 +2,8 @@
 //
 #include "Engine.h"
 
-struct Transform
-{
-    nu::Vector2 position;
-    float rotation;
-    float scale;
-};
 
-class Actor
-{
-public:
-    Actor() = default;
-    Actor(const Transform& transform) : m_transform{ transform } {}
 
-    void Update(float dt) 
-    {
-        m_transform.position += (m_velocity * dt);
-        m_velocity *= 0.997f;
-
-        m_transform.position.x = nu::math::Wrap((float)0, 1280.0f, m_transform.position.x);
-        m_transform.position.y = nu::math::Wrap(float(0), 1024.0f, m_transform.position.y);
-    }
-
-    void Draw(const nu::Renderer& renderer) const
-    {
-        renderer.SetColorFloat(1.0f, 1.0f, 1.0f);
-        renderer.DrawFillRect(m_transform.position.x - (m_transform.scale * 0.5f), m_transform.position.y - (m_transform.scale * 0.5f), m_transform.scale, m_transform.scale);
-    }
-
-    const Transform& GetTransform() const { return m_transform;}
-    void SetPosition(const nu::Vector2& position) { m_transform.position = position; }
-    void SetRoation(float rotation) { m_transform.rotation = rotation; }
-    void SetScale(float scale) { m_transform.scale = scale; }
-
-    nu::Vector2 GetVelocity() { return m_velocity; }
-    void SetVelocity(const nu::Vector2& velocity) { m_velocity = velocity; }
-protected:
-    Transform m_transform;
-    nu::Vector2 m_velocity{ 0,0 };
-};
 
 int main()
 {
@@ -56,7 +19,7 @@ int main()
     //I did it bro
    // fnEngine();
     nu::Time time;
-    Actor player{ Transform{ nu::Vector2{640.0f, 512.0f}, 0.0f, 50.0f } };
+    nu::Actor player{ nu::Transform{ nu::Vector2{640.0f, 512.0f}, 0.0f, 50.0f } };
 
 
     nu::Vector2 position{ 640.0f, 512.0f };

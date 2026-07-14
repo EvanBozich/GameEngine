@@ -5,6 +5,8 @@
 #include "Input.h"
 #include "GameTime.h"
 #include "MathUtil.h"
+#include "Transform.h"
+#include "Actor.h"
 #include <vector>
 #include <iostream>
 #include <string>
