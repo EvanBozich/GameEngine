@@ -3,12 +3,30 @@
 
 #include "pch.h"
 #include "framework.h"
-#include <iostream>
+#include "Engine.h"
 
-// TODO: This is an example of a library function
-void fnEngine()
+namespace nu
 {
-	std::cout << "welcome to the library.\n";
+	Engine engine;
+	bool Engine::Initialize()
+	{
+		m_renderer.Initialize("Game engine", 1280, 1024);
+		m_input.Initialize();
+
+		return true;
+	}
+
+	void Engine::Update()
+	{
+		m_input.Update();
+		m_time.Tick();
+	}
+
+	void Engine::Shutdown()
+	{
+		m_input.Shutdown();
+		m_renderer.Shutdown();
+	}
 }
 
 

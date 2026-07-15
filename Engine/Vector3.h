@@ -4,7 +4,12 @@ namespace nu
 {
 	struct Vector3
 	{
-		float x, y, z;
+		union
+		{
+			struct { float x, y, z; };
+			struct { float r, g, b; };
+		};
+		//float x, y, z;
 
 		Vector3() = default;
 		Vector3(float x, float y, float z) : x{ x }, y{ y }, z{ z } {}
@@ -41,5 +46,8 @@ namespace nu
 		float Length() const { return std::sqrt(LengthSqr()); }
 		Vector3 Normalized() const { return (*this) / Length(); }
 		float Dot(const Vector3& v) const { return (this->x * v.x) + (this->y * v.y) + (this->z * v.z); }
+		//static float Dot(const Vector3& v1, const Vector3& v2) {return (v1 * v2) + () }
 	};
+
+	using Color = Vector3;
 }

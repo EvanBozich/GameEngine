@@ -2,8 +2,11 @@
 namespace nu::math
 {
 	constexpr float Pie = 3.1415926535897932384626433832795f;
-		constexpr float TwoPie = 6.283185307179586476925286766559f;
-		constexpr float HalfPie = 1.5707963267948966192313216916398f;
+	constexpr float TwoPie = 6.283185307179586476925286766559f;
+	constexpr float HalfPie = 1.5707963267948966192313216916398f;
+
+	constexpr float RadToDeg = 180.0f / Pie;
+	constexpr float DegToRad = Pie / 180.0f;
 
 	template<typename T>
 	T Wrap(T min, T max, T value) 

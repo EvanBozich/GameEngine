@@ -1,7 +1,11 @@
 #pragma once
 #include "SDL3/SDL.h"
+#include "Model.h"
+#include "Transform.h"
 
-namespace nu {
+
+namespace nu 
+{
 
 	class Renderer
 	{
@@ -20,7 +24,7 @@ namespace nu {
 		void DrawRect(float x, float y, float w, float h) const;
 		void DrawLine(float x1, float y1, float x2, float y2) const;
 
-
+		void DrawModel(const Model& model, const Transform& transform) const;
 
 	private :
 		SDL_Window* m_window = nullptr;
