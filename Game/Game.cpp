@@ -37,7 +37,11 @@ int main()
     sounds.push_back(sound);
     audio->createSound("scream.mp3", FMOD_DEFAULT, 0, &sound);
     sounds.push_back(sound);
+    audio->createSound("alert.mp3", FMOD_DEFAULT, 0, &sound);
+    sounds.push_back(sound);
 
+
+    audio->playSound(sounds[5], nullptr, false, nullptr);
     //main loop
     while (!quit) 
     {
