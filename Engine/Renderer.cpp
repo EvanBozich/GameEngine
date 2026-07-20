@@ -78,13 +78,13 @@ namespace nu
     void Renderer::DrawModel(const Model& model, const Transform& transform) const
     {
         
-        for (auto mesh : model.GetMeshes())
+        for (auto& mesh : model.GetMeshes())
         {
 
             SetColorFloat(mesh.GetColor().r, mesh.GetColor().g, mesh.GetColor().b);
-            auto points = mesh.GetPoints();
+            auto& points = mesh.GetPoints();
 
-            for (int i = 0; i + 1 < points.size(); i++)
+            for (int i = 0; i < points.size(); i++)
             {
                 Vector2 v1 = points[i];
                 Vector2 v2 = points[i] + 1;

@@ -7,6 +7,7 @@
 #include "MathUtil.h"
 #include "Transform.h"
 #include "Actor.h"
+#include "Scene.h"
 #include <vector>
 #include <iostream>
 #include <string>

@@ -4,14 +4,22 @@
 
 void Player::Update(float dt)
 {
-    nu::Vector2 force{ 0.0f, 0.0f };
+    float thrust = 0.0f;
+    if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_W)) thrust = m_speed;
+    if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_S)) thrust = -m_speed;
 
-    if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_A)) force.x = -m_speed;
-    if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_D)) force.x = m_speed;
-    if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_W)) force.y = -m_speed;
-    if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_S)) force.y = m_speed;
+    //SetVelocity(GetVelocity() + (force * dt));
+    float roatate = 0.0f;
+    if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_A)) roatate = -180.0f;
+    if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_D)) roatate = +180.0f;
 
-    SetVelocity(GetVelocity() + (force * dt));
+    SetRoation(m_transform.rotation + roatate * dt);
+
+    nu::Vector2 forward{ 1, 0 }; //->
+    nu::Vector2 velocity = forward.Rotate(m_transform.rotation * nu::math::DegToRad) * thrust;
+    AddVelocity(velocity * dt);
+
+
     Actor::Update(dt);
 }
 
