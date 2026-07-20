@@ -18,9 +18,12 @@ int main()
    
     nu::engine.Initialize();
     //Mesh mesh{ { {20, 2}, {19, 3 }, {0,0} }, {0.8f, 0.8f, 0.8f} };
-    Mesh mesh1{ { Vector2{0,-3}, Vector2{5,0}, Vector2{0,3}, Vector2{-3,0 }, Vector2{0,-3} }, Color{1.0f, 1.0f, 1.0f} };
-    Model model = std::vector<Mesh>{ mesh1 };
-
+    Mesh mesh1{ { Vector2{6,0}, Vector2{-3,-5}, Vector2{0,3}, Vector2{-3,0 }, Vector2{0,-3} }, Color{1.0f, 1.0f, 1.0f} };
+    Mesh mesh2{ { Vector2{6,0}, Vector2{-3,-5}, Vector2{-2,0}, Vector2{6,0}, Vector2{-3,5}, Vector2{-2,0} }, Color{0.5f, 0.52f, 1.58f} };
+    //Mesh mesh3{ { Vector2{5,0}, Vector2{0,3} }, Color{0.5f, 0.52f, 1.58f} };
+    Mesh mesh4{ { Vector2{-2,0}, Vector2{-5,-2}, Vector2{-4,0}, Vector2{-5,2}, Vector2{-2,0} }, Color{2.07f, 0.05f, 0.02f} };
+    //Mesh mesh5{ { Vector2{-3,0}, Vector2{0,-3} }, Color{2.07f, 0.05f, 0.02f} };
+    Model model = std::vector<Mesh>{ mesh2, mesh4,};
     Scene scene;
 
     PlayerDesc playerDesc;
