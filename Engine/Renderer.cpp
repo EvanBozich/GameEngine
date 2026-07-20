@@ -84,10 +84,10 @@ namespace nu
             SetColorFloat(mesh.GetColor().r, mesh.GetColor().g, mesh.GetColor().b);
             auto& points = mesh.GetPoints();
 
-            for (int i = 0; i < points.size(); i++)
+            for (int i = 0; i + 1 < points.size(); i++)
             {
                 Vector2 v1 = points[i];
-                Vector2 v2 = points[i] + 1;
+                Vector2 v2 = points[i + 1];
 
                 v1 *= transform.scale;
                 v2 *= transform.scale;

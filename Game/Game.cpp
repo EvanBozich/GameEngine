@@ -18,15 +18,15 @@ int main()
    
     nu::engine.Initialize();
     //Mesh mesh{ { {20, 2}, {19, 3 }, {0,0} }, {0.8f, 0.8f, 0.8f} };
-    Mesh mesh2{ { Vector2{0,-3}, Vector2{5,0}, Vector2{0,3}, Vector2{-3,0 }, Vector2{0,-3} }, Color{1.0f, 1.0f, 1.0f} };
-    Model model = std::vector<Mesh>{ mesh2 };
+    Mesh mesh1{ { Vector2{0,-3}, Vector2{5,0}, Vector2{0,3}, Vector2{-3,0 }, Vector2{0,-3} }, Color{1.0f, 1.0f, 1.0f} };
+    Model model = std::vector<Mesh>{ mesh1 };
 
     Scene scene;
 
     PlayerDesc playerDesc;
     playerDesc.name = "Player";
     playerDesc.model = model;
-    playerDesc.transform = nu::Transform{ nu::Vector2{640.0f, 512.0f} };
+    playerDesc.transform = nu::Transform{ nu::Vector2{640.0f, 512.0f}, 0.0f, 15.0f };
     playerDesc.speed = 400.0f;
     Player* player = new Player{ playerDesc };
 
@@ -34,7 +34,7 @@ int main()
 
     for (int i = 0; i < 20; i++)
     {
-        Enemy* enemy = new Enemy{ 400.0f, nu::Transform{ nu::Vector2{nu::Randomfloat(), nu::Randomfloat()}, 90.0f, 10.0f}, Model{{mesh2}}};
+        Enemy* enemy = new Enemy{ 400.0f, nu::Transform{ nu::Vector2{nu::Randomfloat(), nu::Randomfloat()}, 90.0f, 10.0f}, Model{{mesh1}}};
         scene.AddActor(enemy);
     }
   
