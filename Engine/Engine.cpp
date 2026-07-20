@@ -8,6 +8,7 @@
 namespace nu
 {
 	Engine engine;
+
 	bool Engine::Initialize()
 	{
 		m_renderer.Initialize("Game engine", 1280, 1024);

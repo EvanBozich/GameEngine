@@ -78,7 +78,7 @@ namespace nu
     void Renderer::DrawModel(const Model& model, const Transform& transform) const
     {
         
-        for ( auto mesh : model.GetMeshes())
+        for (auto mesh : model.GetMeshes())
         {
 
             SetColorFloat(mesh.GetColor().r, mesh.GetColor().g, mesh.GetColor().b);
