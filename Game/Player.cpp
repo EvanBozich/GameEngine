@@ -5,13 +5,13 @@
 void Player::Update(float dt)
 {
     float thrust = 0.0f;
-    if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_W)) thrust = m_speed;
-    if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_S)) thrust = -m_speed;
+    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_W)) thrust = m_speed;
+    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_S)) thrust = -m_speed;
 
     //SetVelocity(GetVelocity() + (force * dt));
     float roatate = 0.0f;
-    if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_A)) roatate = -180.0f;
-    if (nu::engine.GetInput().GetKeyDown(SDL_SCANCODE_D)) roatate = +180.0f;
+    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_A)) roatate = -180.0f;
+    if (nu::Engine::Get().GetInput().GetKeyDown(SDL_SCANCODE_D)) roatate = +180.0f;
 
     SetRoation(m_transform.rotation + roatate * dt);
 

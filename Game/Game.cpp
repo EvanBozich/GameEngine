@@ -16,7 +16,7 @@ int main()
     void* extradriverdata = nullptr;
     audio->init(32, FMOD_INIT_NORMAL, extradriverdata);
    
-    nu::engine.Initialize();
+    Engine::Get().Initialize();
     //Mesh mesh{ { {20, 2}, {19, 3 }, {0,0} }, {0.8f, 0.8f, 0.8f} };
     Mesh mesh1{ { Vector2{6,0}, Vector2{-3,-5}, Vector2{0,3}, Vector2{-3,0 }, Vector2{0,-3} }, Color{1.0f, 1.0f, 1.0f} };
     Mesh mesh2{ { Vector2{6,0}, Vector2{-3,-5}, Vector2{-2,0}, Vector2{6,0}, Vector2{-3,5}, Vector2{-2,0} }, Color{0.5f, 0.52f, 1.58f} };
@@ -129,34 +129,34 @@ int main()
         }
 
 
-        if (nu::engine.GetInput().GetKeyPressed(SDL_SCANCODE_G))
+        if (Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_G))
         {
             audio->playSound(sounds[0], nullptr, false, nullptr);
         }
 
-        if (nu::engine.GetInput().GetKeyPressed(SDL_SCANCODE_F))
+        if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_F))
         {
             audio->playSound(sounds[1], nullptr, false, nullptr);
         }
-        if (nu::engine.GetInput().GetKeyPressed(SDL_SCANCODE_R))
+        if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_R))
         {
             audio->playSound(sounds[2], nullptr, false, nullptr);
         }
-        if (nu::engine.GetInput().GetKeyPressed(SDL_SCANCODE_E))
+        if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_E))
         {
             audio->playSound(sounds[3], nullptr, false, nullptr);
         }
-        if (nu::engine.GetInput().GetKeyPressed(SDL_SCANCODE_T))
+        if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_T))
         {
             audio->playSound(sounds[4], nullptr, false, nullptr);
         }
 
         audio->update();
-        nu::engine.Update();
-        float dt = engine.GetTime().GetDeltaTime();
+        nu::Engine::Get().Update();
+        float dt = Engine::Get().GetTime().GetDeltaTime();
 
-        //player.SetRoation(player.GetTransform().rotation + (90.0f * nu::engine.GetTime().GetDeltaTime()));
-        //player.Update(nu::engine.GetTime().GetDeltaTime());
+        //player.SetRoation(player.GetTransform().rotation + (90.0f * nu::Engine::Get().GetTime().GetDeltaTime()));
+        //player.Update(nu::Engine::Get().GetTime().GetDeltaTime());
         //enemy.Update(dt);
 
         scene.Update(dt);
@@ -164,16 +164,16 @@ int main()
      
         
       
-        nu::engine.GetRenderer().SetColorInt(0, 0, 0);
-        nu::engine.GetRenderer().Clear();
+        nu::Engine::Get().GetRenderer().SetColorInt(0, 0, 0);
+        nu::Engine::Get().GetRenderer().Clear();
 
 
-        //player.Draw(nu::engine.GetRenderer());
-        //enemy.Draw(nu::engine.GetRenderer());
+        //player.Draw(nu::Engine::Get().GetRenderer());
+        //enemy.Draw(nu::Engine::Get().GetRenderer());
 
-        scene.Draw(nu::engine.GetRenderer());
+        scene.Draw(nu::Engine::Get().GetRenderer());
 
-        nu::engine.GetRenderer().Present();
+        nu::Engine::Get().GetRenderer().Present();
     }
 
     //shutdown
