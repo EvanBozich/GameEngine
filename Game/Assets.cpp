@@ -1,0 +1,14 @@
+#include "Assets.h"
+
+namespace Assets
+{
+	nu::Mesh mesh1{ { nu::Vector2{6,0}, nu::Vector2{-3,-5}, nu::Vector2{0,3}, nu::Vector2{-3,0 }, nu::Vector2{0,-3} }, nu::Color{1.0f, 1.0f, 1.0f} };
+	nu::Mesh mesh2{ { nu::Vector2{6,0}, nu::Vector2{-3,-5}, nu::Vector2{-2,0}, nu::Vector2{6,0}, nu::Vector2{-3,5}, nu::Vector2{-2,0} }, nu::Color{0.5f, 0.52f, 1.58f} };
+	nu::Mesh mesh4{ { nu::Vector2{-2,0}, nu::Vector2{-5,-2}, nu::Vector2{-4,0}, nu::Vector2{-5,2}, nu::Vector2{-2,0} }, nu::Color{2.07f, 0.05f, 0.02f} };
+	//nu::Mesh playerMesh { mesh2, mesh4 };
+	nu::Model playerModel = std::vector<nu::Mesh>{ mesh2, mesh4 };
+	nu::Model enemyModel = std::vector<nu::Mesh>{ mesh1 };
+
+
+
+} 

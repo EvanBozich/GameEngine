@@ -29,6 +29,9 @@ namespace nu
 		Renderer& GetRenderer(){ return m_renderer; }
 		Time& GetTime(){ return m_time; }
 
+		//Singleton stuff 
+		Engine(const Engine&) = delete;
+		Engine& operator =(const Engine&) = delete;
 	private:
 		Engine() = default;
 		Input m_input;

@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include <fmod.hpp>
-
+#include "Assets.h"
 using namespace nu;
 
 
@@ -28,7 +28,7 @@ int main()
 
     PlayerDesc playerDesc;
     playerDesc.name = "Player";
-    playerDesc.model = model;
+    playerDesc.model = Assets::playerModel;
     playerDesc.transform = nu::Transform{ nu::Vector2{640.0f, 512.0f}, 0.0f, 15.0f };
     playerDesc.speed = 400.0f;
     Player* player = new Player{ playerDesc };
@@ -37,7 +37,7 @@ int main()
 
     for (int i = 0; i < 20; i++)
     {
-        Enemy* enemy = new Enemy{ 400.0f, nu::Transform{ nu::Vector2{nu::Randomfloat(), nu::Randomfloat()}, 90.0f, 10.0f}, Model{{mesh1}}};
+        Enemy* enemy = new Enemy{ 400.0f, nu::Transform{ nu::Vector2{nu::Randomfloat(1280), nu::Randomfloat(1024)}, 90.0f, 10.0f}, Model{{mesh1}}};
         scene.AddActor(enemy);
     }
   
