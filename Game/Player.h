@@ -5,6 +5,7 @@ struct PlayerDesc : public nu::ActorDesc
 {
 	float speed;
 };
+
 class Player : public nu::Actor
 {
 public:

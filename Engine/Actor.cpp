@@ -7,8 +7,15 @@ namespace nu {
 
     void Actor::Update(float dt)
     {
+        if (m_lifespan > 0)
+        {
+            m_lifespan -= dt;
+            m_destroyed = (m_lifespan <= 0.0f);
+         
+        }
+
         m_transform.position += (m_velocity * dt);
-        m_velocity *= 0.997f;
+        m_velocity *= 1.0f / ((1.0f) + m_damping * dt);
 
         m_transform.position.x = nu::math::Wrap((float)0, 1280.0f, m_transform.position.x);
         m_transform.position.y = nu::math::Wrap(float(0), 1024.0f, m_transform.position.y);

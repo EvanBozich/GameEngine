@@ -1,8 +1,8 @@
 #pragma once
 #include "Actor.h"
-struct EnemyDesc
+struct EnemyDesc : public nu::ActorDesc
 {
-
+	float speed;
 };
 
 class Enemy : public nu::Actor

@@ -30,13 +30,16 @@ int main()
     playerDesc.name = "Player";
     playerDesc.model = Assets::playerModel;
     playerDesc.transform = nu::Transform{ nu::Vector2{640.0f, 512.0f}, 0.0f, 15.0f };
-    playerDesc.speed = 400.0f;
+    playerDesc.speed = 800.0f;
+    playerDesc.damping = 1.0f;
     Player* player = new Player{ playerDesc };
 
     scene.AddActor(player);
 
     for (int i = 0; i < 20; i++)
     {
+        EnemyDesc enemyDesc;
+        enemyDesc.name = "Enemy";
         Enemy* enemy = new Enemy{ 400.0f, nu::Transform{ nu::Vector2{nu::Randomfloat(1280), nu::Randomfloat(1024)}, 90.0f, 10.0f}, Model{{mesh1}}};
         scene.AddActor(enemy);
     }
