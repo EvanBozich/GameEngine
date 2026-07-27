@@ -41,3 +41,12 @@ void Enemy::Draw(const nu::Renderer& renderer) const
 {
     Actor::Draw(renderer);
 }
+
+void Enemy::OnCollision(Actor* other)
+{
+    if (other->GetTag() == "Bullet")
+    {
+        SetDestroyed();
+        other->SetDestroyed();
+    }
+}

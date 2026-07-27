@@ -17,9 +17,11 @@ namespace nu
 		template<typename T>
 		T* GetActorByName(const std::string& name);
 
+
 	private:
 		std::vector<Actor*> m_actors;
 		std::vector<Actor*> m_pending_actors;
+		void UpdateCollisions();
 
 	};
 

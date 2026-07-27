@@ -9,6 +9,7 @@
 #include "Actor.h"
 #include "Scene.h"
 #include "File.h"
+#include "Audio.h"
 #include <vector>
 #include <iostream>
 #include <string>

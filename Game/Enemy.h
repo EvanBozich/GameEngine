@@ -17,6 +17,8 @@ class Enemy : public nu::Actor
 
 		void Draw(const class nu::Renderer& renderer) const override;
 
+		void OnCollision(Actor* other) override;
+
 	private:
 		int m_ammo = 0;
 		float m_speed = 800.0f;
