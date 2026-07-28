@@ -1,5 +1,6 @@
 #pragma once
 #include "SDL3/SDL.h"
+#include "SDL3_ttf/SDL_ttf.h"
 #include "Model.h"
 #include "Transform.h"
 
@@ -25,6 +26,8 @@ namespace nu
 		void DrawLine(float x1, float y1, float x2, float y2) const;
 
 		void DrawModel(const Model& model, const Transform& transform) const;
+
+		friend class Text;
 
 	private :
 		SDL_Window* m_window = nullptr;

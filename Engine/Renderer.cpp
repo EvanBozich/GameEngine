@@ -9,6 +9,12 @@ namespace nu
     {
         SDL_Init(SDL_INIT_VIDEO);
 
+        if (!TTF_Init()) {
+            std::cerr << "TTF_Init Error: " << SDL_GetError() << std::endl;
+            return false;
+        }
+
+
          m_window = SDL_CreateWindow(name, width, height, 0);
         if (m_window == nullptr) {
             std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
@@ -30,6 +36,7 @@ namespace nu
     }
     void Renderer::Shutdown()
     {
+        TTF_Quit();
         SDL_DestroyRenderer(m_renderer);
         SDL_DestroyWindow(m_window);
         SDL_Quit();

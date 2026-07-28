@@ -10,6 +10,8 @@
 #include "Scene.h"
 #include "File.h"
 #include "Audio.h"
+#include "Text.h"
+#include "Game.h"
 #include <vector>
 #include <iostream>
 #include <string>
