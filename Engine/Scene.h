@@ -25,7 +25,7 @@ namespace nu
 
 	};
 
-	template<typename T = Actor>
+	template<typename T>
 	inline T* Scene::GetActorByName(const std::string& name)
 	{
 		for (auto actor : m_actors)
