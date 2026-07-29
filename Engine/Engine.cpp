@@ -12,7 +12,6 @@ namespace nu
 	{
 		m_renderer.Initialize("Game engine", 1280, 1024);
 		m_input.Initialize();
-		m_audio.Initialize();
 
 		return true;
 	}
@@ -21,14 +20,12 @@ namespace nu
 	{
 		m_input.Update();
 		m_time.Tick();
-		m_audio.Update();
 	}
 
 	void Engine::Shutdown()
 	{
 		m_input.Shutdown();
 		m_renderer.Shutdown();
-		m_audio.Shutdown();
 	}
 }
 

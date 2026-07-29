@@ -22,7 +22,7 @@ namespace nu {
 	{
 		if (result != FMOD_OK)
 		{
-			std::cerr << result << std::endl;
+			//std::cerr << FMOD_ErrorString(result) << std::endl;
 			return false;
 		}
 
@@ -31,19 +31,18 @@ namespace nu {
 
 	void Audio::Shutdown()
 	{
-		CheckFMODResult(m_fmodSystem->release());
+		//CheckFMODResult(/*TODO: release() fmod system*/);
 	}
 
 	void Audio::Update()
 	{
-
-		CheckFMODResult(m_fmodSystem->update());
+		//CheckFMODResult(/*TODO: update() fmod system*/);
 	}
 
 	bool Audio::AddSound(const std::string& name, const std::string& filename)
 	{
 		// check if key exists in sounds map
-		if (m_sounds.contains(name))
+		//if (/*TODO: check if name already exists in m_sounds*/)
 		{
 			std::cerr << "Audio System : name already exists " << name << std::endl;
 			return false;
@@ -51,28 +50,28 @@ namespace nu {
 
 		// create sound from key
 		FMOD::Sound* sound = nullptr;
-		FMOD_RESULT result = m_fmodSystem->createSound(name.c_str(), FMOD_DEFAULT, 0, &sound);
-		if (!CheckFMODResult(result))
+		//FMOD_RESULT result = m_fmodSystem->createSound(/*TODO: pass parameters to create sound*/);
+		//if (!CheckFMODResult(result))
 			return false;
 
 		// insert sound into map
 		//TODO: add sound to m_sounds using name as key
-		m_sounds.insert(name, filename);
+
 		return true;
 	}
 
 	bool Audio::PlaySound(const std::string& name)
 	{
 		// check if sound exists in sounds map
-		if (m_sounds.contains(name))
+		//if (/*TODO: check if name doesn't exist in m_sounds*/)
 		{
 			std::cerr << "Audio System : name doesn't exists " << name << std::endl;
 			return false;
 		}
 
 		// play sound from key
-		FMOD_RESULT result = m_fmodSystem->playSound(m_sounds.at(name), FMOD_DEFAULT, false, 0);
-		if (!CheckFMODResult(result))
+		//FMOD_RESULT result = m_fmodSystem->playSound(/*TODO: pass play sound parameters*/);
+		//if (!CheckFMODResult(result))
 			return false;
 
 		return true;

@@ -35,13 +35,11 @@ namespace nu
 		//Singleton stuff 
 		Engine(const Engine&) = delete;
 		Engine& operator =(const Engine&) = delete;
-		Audio& GetAudio() { return m_audio; }
 	private:
 		Engine() = default;
 		Input m_input;
 		Renderer m_renderer;
 		Time m_time;
-		Audio m_audio;
 	};
 
 }
