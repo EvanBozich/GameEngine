@@ -22,7 +22,7 @@ namespace nu {
 	{
 		if (result != FMOD_OK)
 		{
-			//std::cerr << FMOD_ErrorString(result) << std::endl;
+			std::cerr << result << std::endl;
 			return false;
 		}
 
@@ -31,31 +31,33 @@ namespace nu {
 
 	void Audio::Shutdown()
 	{
-		//CheckFMODResult(/*TODO: release() fmod system*/);
+		CheckFMODResult(/*TODO: release() fmod system*/m_fmodSystem->release());
 	}
 
 	void Audio::Update()
 	{
-		//CheckFMODResult(/*TODO: update() fmod system*/);
+		CheckFMODResult(/*TODO: update() fmod system*/m_fmodSystem->update());
 	}
 
 	bool Audio::AddSound(const std::string& name, const std::string& filename)
 	{
 		// check if key exists in sounds map
-		//if (/*TODO: check if name already exists in m_sounds*/)
+		if (/*TODO: check if name already exists in m_sounds*/m_sounds.contains(name))
 		{
 			std::cerr << "Audio System : name already exists " << name << std::endl;
 			return false;
 		}
+		// audio->createSound("whistle.mp3", FMOD_DEFAULT, 0, &sound);
 
 		// create sound from key
 		FMOD::Sound* sound = nullptr;
-		//FMOD_RESULT result = m_fmodSystem->createSound(/*TODO: pass parameters to create sound*/);
-		//if (!CheckFMODResult(result))
+		FMOD_RESULT result = m_fmodSystem->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
+		if (!CheckFMODResult(result))
 			return false;
 
 		// insert sound into map
 		//TODO: add sound to m_sounds using name as key
+		m_sounds.insert({ name, sound });
 
 		return true;
 	}
@@ -63,15 +65,16 @@ namespace nu {
 	bool Audio::PlaySound(const std::string& name)
 	{
 		// check if sound exists in sounds map
-		//if (/*TODO: check if name doesn't exist in m_sounds*/)
+		if (!(m_sounds.contains(name)))
 		{
 			std::cerr << "Audio System : name doesn't exists " << name << std::endl;
 			return false;
 		}
+		//audio->playSound(sounds[0], nullptr, false, nullptr);
 
 		// play sound from key
-		//FMOD_RESULT result = m_fmodSystem->playSound(/*TODO: pass play sound parameters*/);
-		//if (!CheckFMODResult(result))
+		FMOD_RESULT result = m_fmodSystem->playSound(m_sounds.at(name), nullptr, false, nullptr);
+		if (!CheckFMODResult(result))
 			return false;
 
 		return true;

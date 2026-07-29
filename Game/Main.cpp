@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include <fmod.hpp>
+#include "Audio.h"
 #include "Assets.h"
 #include "SpaceGame.h"
 using namespace nu;
@@ -11,14 +12,12 @@ using namespace nu;
 
 int main()
 {
-    SetWorkingDirectory("Assets");
+    SetWorkingDirectory("assets");
     //Initialize
-    FMOD::System* audio;
-    FMOD::System_Create(&audio);
-    void* extradriverdata = nullptr;
-    audio->init(32, FMOD_INIT_NORMAL, extradriverdata);
    
     Engine::Get().Initialize();
+    Engine::Get().GetAudio().AddSound("alert", "alert.mp3");
+
     //Mesh mesh{ { {20, 2}, {19, 3 }, {0,0} }, {0.8f, 0.8f, 0.8f} };
     Mesh mesh1{ { Vector2{6,0}, Vector2{-3,-5}, Vector2{0,3}, Vector2{-3,0 }, Vector2{0,-3} }, Color{1.0f, 1.0f, 1.0f} };
     Scene scene;
@@ -54,25 +53,6 @@ int main()
     SDL_Event e;
     bool quit = false;
 
-    std::vector<FMOD::Sound*> sounds;
-    FMOD::Sound* sound = nullptr;
-
-    audio->createSound("whistle.mp3", FMOD_DEFAULT, 0, &sound);
-    sounds.push_back(sound);
-    audio->createSound("oof.mp3", FMOD_DEFAULT, 0, &sound);
-    sounds.push_back(sound);
-    audio->createSound("error.mp3", FMOD_DEFAULT, 0, &sound);
-    sounds.push_back(sound);
-    audio->createSound("hee-hee.mp3", FMOD_DEFAULT, 0, &sound);
-    sounds.push_back(sound);
-    audio->createSound("scream.mp3", FMOD_DEFAULT, 0, &sound);
-    sounds.push_back(sound);
-    audio->createSound("alert.mp3", FMOD_DEFAULT, 0, &sound);
-    sounds.push_back(sound);
-
-
-    audio->playSound(sounds[5], nullptr, false, nullptr);
-
 
     //main loop
     while (!quit) 
@@ -89,30 +69,11 @@ int main()
             }
         }
 
-
-        if (Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_G))
+        if (Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_1))
         {
-            audio->playSound(sounds[0], nullptr, false, nullptr);
+            Engine::Get().GetAudio().PlaySound("alert");
         }
 
-        if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_F))
-        {
-            audio->playSound(sounds[1], nullptr, false, nullptr);
-        }
-        if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_R))
-        {
-            audio->playSound(sounds[2], nullptr, false, nullptr);
-        }
-        if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_E))
-        {
-            audio->playSound(sounds[3], nullptr, false, nullptr);
-        }
-        if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_T))
-        {
-            audio->playSound(sounds[4], nullptr, false, nullptr);
-        }
-
-        audio->update();
         nu::Engine::Get().Update();
         float dt = Engine::Get().GetTime().GetDeltaTime();
 

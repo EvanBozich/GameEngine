@@ -31,6 +31,8 @@ namespace nu
 		Input& GetInput() { return m_input; }
 		Renderer& GetRenderer(){ return m_renderer; }
 		Time& GetTime(){ return m_time; }
+		Audio& GetAudio() { return m_audio; }
+
 
 		//Singleton stuff 
 		Engine(const Engine&) = delete;
@@ -40,6 +42,7 @@ namespace nu
 		Input m_input;
 		Renderer m_renderer;
 		Time m_time;
+		Audio m_audio;
 	};
 
 }
