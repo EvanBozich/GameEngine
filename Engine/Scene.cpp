@@ -49,7 +49,17 @@ namespace nu {
 		}
 	}
 
-	void Scene::AddActor(Actor* actor) 
+	void Scene::RemoveAllActors()
+	{
+		for (auto actor : m_actors)
+		{
+			delete actor;
+		}
+
+		m_actors.clear();
+	}
+
+	void Scene::AddActor(Actor* actor)
 	{ 
 		actor->m_scene = this;
 		m_pending_actors.push_back(actor); 

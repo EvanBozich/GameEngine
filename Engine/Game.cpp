@@ -11,7 +11,7 @@ namespace nu
 
 
 
-	 void Game::Draw(const class Renderer& renderer)
+	 void Game::Draw(class Renderer& renderer)
 	 {
 		 m_scene->Draw(renderer);
 	 }

@@ -1,12 +1,31 @@
 #include "SpaceGame.h"
 #include "Engine.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "Assets.h"
 
-
+using namespace nu;
 
 bool SpaceGame::Initialize()
 {
 	Game::Initialize();
-	m_scene = new nu::Scene();
+	m_scene = new Scene();
+	m_scene->SetGame(this);
+
+	//nu::Engine::Get().GetAudio().AddSound("alert", "alert.mp3");
+
+	m_titleFont = new Font();
+	m_titleFont->Load("Fonts/ArcadeClassic.ttf", 64);
+	
+	m_titleText = new Text(m_titleFont);
+	m_titleText->Create(Engine::Get().GetRenderer(), "Hello World", Color{ 1.0f, 1.0f, 1.0f });
+
+	m_gameFont = new Font();
+	m_gameFont->Load("Fonts/ArcadeClassic.ttf", 20);
+
+	m_scoreText = new Text(m_gameFont);
+	m_livesText = new Text(m_gameFont);
+
 
 	return true;
 }
@@ -27,17 +46,85 @@ void SpaceGame::Update(float dt)
 		m_gameState = GameState::StartLevel;
 		break;
 	case GameState::StartLevel:
+		m_scene->RemoveAllActors();
+		SpawnPlayer();
+		m_gameState = GameState::Game;
+
 		break;
 	case GameState::Game:
+		m_spawntimer -= dt;
+		if (m_spawntimer <= 0)
+		{
+			m_spawntimer = nu::Randomfloat(3.0f, 5.0f);
+			SpawnEnemy();
+		}
 		break;
 	case GameState::GameOver:
 		break;
 	}
+
 	Game::Update(dt);
 
 }
 
-void SpaceGame::Draw(const nu::Renderer& renderer)
+void SpaceGame::Draw(nu::Renderer& renderer)
 {
 	Game::Draw(renderer);
+
+	switch (m_gameState)
+	{
+	case SpaceGame::GameState::Title:
+		m_titleText->Draw(renderer, 400, 400);
+		break;
+	case SpaceGame::GameState::StartGame:
+		break;
+	case SpaceGame::GameState::StartLevel:
+		break;
+	case SpaceGame::GameState::Game:
+		//draw score/lives
+		m_scoreText->Create(renderer, "Score: " + std::to_string(m_score), { 1.0f,1.0f,1.0f });
+		m_livesText->Create(renderer, "Lives: " + std::to_string(m_lives), { 1.0f,1.0f,1.0f });
+		m_scoreText->Draw(renderer, 32, 32);
+		m_livesText->Draw(renderer, 1020, 32);
+		break;
+	case SpaceGame::GameState::GameOver:
+		break;
+	default:
+		break;
+	}
+}
+
+void SpaceGame::OnPlayerDead()
+{
+	m_lives--;
+	if (m_lives == 0)
+	{
+		m_gameState = GameState::GameOver;
+	}
+	else
+	{
+		m_gameState = GameState::StartLevel;
+	}
+}
+
+void SpaceGame::SpawnEnemy()
+{
+	//EnemyDesc enemyDesc;
+	//enemyDesc.name = "Enemy";
+	//enemyDesc.tag = "Enemy";
+	//enemyDesc.model = Assets::enemyModel;
+	//Enemy* enemy = new Enemy{ 400.0f, nu::Transform{ nu::Vector2{nu::Randomfloat(1280), nu::Randomfloat(1024)}, 90.0f, 10.0f}, Model{{mesh1}} };
+	//m_scene->AddActor(enemy);
+}
+
+void SpaceGame::SpawnPlayer()
+{
+	PlayerDesc playerDesc;
+	playerDesc.name = "Player";
+	playerDesc.model = Assets::playerModel;
+	playerDesc.transform = nu::Transform{ nu::Vector2{640.0f, 512.0f}, 0.0f, 15.0f };
+	playerDesc.speed = 800.0f;
+	playerDesc.damping = 1.0f;
+	Player* player = new Player{ playerDesc };
+	m_scene->AddActor(player);
 }

@@ -1,5 +1,7 @@
 #pragma once
 #include "Game.h"
+#include "Font.h"
+#include "Text.h"
 
 class SpaceGame : public nu::Game
 {
@@ -19,12 +21,27 @@ public:
 	bool Initialize() override;
 
 	 void Update(float dt) override;
-	 void Draw(const class nu::Renderer& renderer) override;
+	 void Draw(class nu::Renderer& renderer) override;
 
-
+	 void OnPlayerDead();
+	 void AddPoints(int points) { m_score += points; }
 
 private:
+	void SpawnPlayer();
+	void SpawnEnemy();
 	int m_score = 0;
 	int m_lives = 0;
+	float m_spawntimer = 0;
+	float m_stateTimer = 0;
+
 	GameState m_gameState = GameState::Title;
+	 nu::Font* m_titleFont = nullptr;
+	 nu::Text* m_titleText = nullptr;
+
+	 nu::Font* m_gameOverFont = nullptr;
+	 nu::Text* m_gameOverText = nullptr;
+
+	 nu::Font* m_gameFont = nullptr;
+	 nu::Text* m_livesText = nullptr;
+	 nu::Text* m_scoreText = nullptr;
 };
