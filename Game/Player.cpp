@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "Engine.h"
 #include "Random.h"
+#include "SpaceGame.h"
 
 
 void Player::Update(float dt)
@@ -47,6 +48,11 @@ void Player::Update(float dt)
         m_scene->AddActor(bullet);
     }
 
+    if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_E))
+    {
+        this->m_transform = nu::Transform{ nu::Vector2{nu::Randomfloat(1280), nu::Randomfloat(1024)}, 0.0f, 15.0f };
+    }
+
 
     Actor::Update(dt);
 }
@@ -58,6 +64,13 @@ void Player::Draw(const nu::Renderer& renderer) const
 
 void Player::OnCollision(Actor* other)
 {
+    if (other->GetTag() == "Enemy")
+    {
 
+            SetDestroyed();
+            ((SpaceGame*)m_scene->GetGame())->OnPlayerDead();
+
+
+    }
 }
 

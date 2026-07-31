@@ -15,10 +15,31 @@ namespace Assets
 	  },
 	  nu::Color{ 1.0f, 0.0f, 0.0f }
 	};
+
+	nu::Mesh asteriodMesh
+	{
+		{
+			nu::Vector2{ 0, -4 },
+			nu::Vector2{ -3, -3 },
+			nu::Vector2{ -4, -1 },
+			nu::Vector2{ -4, 1 },
+			nu::Vector2{ -3, 3 },
+			nu::Vector2{ 0, 4 },
+			nu::Vector2{ 3, 3 },
+			nu::Vector2{ 4, 1 },
+			nu::Vector2{ 4, -1 },
+			nu::Vector2{ 3, -3 },
+			nu::Vector2{ 0, -4 },
+		},
+		nu::Color{1.0f, 1.0f, 1.0f}
+	};
+
+
 	//nu::Mesh playerMesh { mesh2, mesh4 };
 	nu::Model playerModel = std::vector<nu::Mesh>{ mesh2, mesh4 };
 	nu::Model enemyModel = std::vector<nu::Mesh>{ mesh1 };
 	nu::Model bulletModel = std::vector<nu::Mesh>{ bulletMesh };
+	nu::Model asteriodModel = std::vector<nu::Mesh>{ asteriodMesh };
 
 
 

@@ -16,10 +16,6 @@ int main()
     //Initialize
    
     Engine::Get().Initialize();
- 
-
-    //Mesh mesh{ { {20, 2}, {19, 3 }, {0,0} }, {0.8f, 0.8f, 0.8f} };
-    Mesh mesh1{ { Vector2{6,0}, Vector2{-3,-5}, Vector2{0,3}, Vector2{-3,0 }, Vector2{0,-3} }, Color{1.0f, 1.0f, 1.0f} };
 
     SpaceGame game;
     game.Initialize();
@@ -42,11 +38,6 @@ int main()
             if (e.type == SDL_EVENT_KEY_DOWN && e.key.scancode == SDL_SCANCODE_ESCAPE) {
                 quit = true;
             }
-        }
-
-        if (Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_1))
-        {
-            Engine::Get().GetAudio().PlaySound("alert");
         }
 
 

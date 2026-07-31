@@ -11,6 +11,7 @@ class Enemy : public nu::Actor
 		Enemy() = default;
 		Enemy(float speed, const nu::Transform& transform) : Actor{ transform }, m_speed{ speed } {}
 		Enemy(float speed, const nu::Transform& transform, const nu::Model& model) : Actor{ transform, model }, m_speed{ speed } {}
+		Enemy(const EnemyDesc& enemyDesc) : Actor{ enemyDesc }, m_speed{ enemyDesc.speed } {};
 
 
 		void Update(float dt) override;

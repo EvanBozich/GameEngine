@@ -12,19 +12,27 @@ bool SpaceGame::Initialize()
 	m_scene = new Scene();
 	m_scene->SetGame(this);
 
-	//nu::Engine::Get().GetAudio().AddSound("alert", "alert.mp3");
+	nu::Engine::Get().GetAudio().AddSound("alert", "alert.mp3");
+	nu::Engine::Get().GetAudio().AddSound("scream", "scream.mp3");
 
 	m_titleFont = new Font();
 	m_titleFont->Load("Fonts/ArcadeClassic.ttf", 64);
 	
 	m_titleText = new Text(m_titleFont);
-	m_titleText->Create(Engine::Get().GetRenderer(), "Hello World", Color{ 1.0f, 1.0f, 1.0f });
+	m_titleText->Create(Engine::Get().GetRenderer(), "Asteriods Cpp edition", Color{ 1.0f, 1.0f, 1.0f });
+
+	m_gameOverFont = new Font();
+	m_gameOverFont->Load("Fonts/ArcadeClassic.ttf", 64);
+
+	m_gameOverText = new Text(m_gameOverFont);
+	m_gameOverText->Create(Engine::Get().GetRenderer(), "GAME OVER", Color{ 1.0f, 0.0f, 0.0f });
 
 	m_gameFont = new Font();
 	m_gameFont->Load("Fonts/ArcadeClassic.ttf", 20);
 
 	m_scoreText = new Text(m_gameFont);
 	m_livesText = new Text(m_gameFont);
+	m_healthText = new Text(m_gameFont);
 
 
 	return true;
@@ -43,23 +51,35 @@ void SpaceGame::Update(float dt)
 	case GameState::StartGame:
 		m_score = 0;
 		m_lives = 3;
+		m_health = 100;
 		m_gameState = GameState::StartLevel;
 		break;
 	case GameState::StartLevel:
 		m_scene->RemoveAllActors();
 		SpawnPlayer();
 		m_gameState = GameState::Game;
-
 		break;
 	case GameState::Game:
+		nu::Engine::Get().GetAudio().PlaySound("main");
 		m_spawntimer -= dt;
+
 		if (m_spawntimer <= 0)
 		{
 			m_spawntimer = nu::Randomfloat(3.0f, 5.0f);
 			SpawnEnemy();
+			for (int i = 0; i < 3; i++)
+			{
+				SpawnAsteriods();
+			}
 		}
 		break;
 	case GameState::GameOver:
+		nu::Engine::Get().GetAudio().PlaySound("scream");
+		m_scene->RemoveAllActors();
+		if (nu::Engine::Get().GetInput().GetKeyPressed(SDL_SCANCODE_SPACE))
+		{
+			m_gameState = GameState::StartGame;
+		}
 		break;
 	}
 
@@ -84,10 +104,13 @@ void SpaceGame::Draw(nu::Renderer& renderer)
 		//draw score/lives
 		m_scoreText->Create(renderer, "Score: " + std::to_string(m_score), { 1.0f,1.0f,1.0f });
 		m_livesText->Create(renderer, "Lives: " + std::to_string(m_lives), { 1.0f,1.0f,1.0f });
+		m_healthText->Create(renderer, "Healt " + std::to_string(m_health), { 1.0f, 1.0f, 1.0f });
 		m_scoreText->Draw(renderer, 32, 32);
 		m_livesText->Draw(renderer, 1020, 32);
+		m_healthText->Draw(renderer, 640, 32);
 		break;
 	case SpaceGame::GameState::GameOver:
+		m_gameOverText->Draw(renderer, 400, 400);
 		break;
 	default:
 		break;
@@ -96,7 +119,11 @@ void SpaceGame::Draw(nu::Renderer& renderer)
 
 void SpaceGame::OnPlayerDead()
 {
-	m_lives--;
+	m_health -= 25;
+	if (m_health == 0)
+	{
+		m_lives--;
+	}
 	if (m_lives == 0)
 	{
 		m_gameState = GameState::GameOver;
@@ -109,12 +136,28 @@ void SpaceGame::OnPlayerDead()
 
 void SpaceGame::SpawnEnemy()
 {
-	//EnemyDesc enemyDesc;
-	//enemyDesc.name = "Enemy";
-	//enemyDesc.tag = "Enemy";
-	//enemyDesc.model = Assets::enemyModel;
-	//Enemy* enemy = new Enemy{ 400.0f, nu::Transform{ nu::Vector2{nu::Randomfloat(1280), nu::Randomfloat(1024)}, 90.0f, 10.0f}, Model{{mesh1}} };
-	//m_scene->AddActor(enemy);
+	EnemyDesc enemyDesc;
+	enemyDesc.name = "Enemy";
+	enemyDesc.tag = "Enemy";
+	enemyDesc.model = Assets::enemyModel;
+	enemyDesc.transform =  nu::Transform{ nu::Vector2{nu::Randomfloat(1280), nu::Randomfloat(1024)}, 90.0f, 10.0f};
+	enemyDesc.speed = 450.0f;
+	enemyDesc.damping = 1.0f;
+	Enemy* enemy = new Enemy{ enemyDesc };
+	m_scene->AddActor(enemy);
+}
+
+void SpaceGame::SpawnAsteriods()
+{
+	EnemyDesc asteriod;
+	asteriod.name = "Asteriod";
+	asteriod.tag = "Enemy";
+	asteriod.model = Assets::asteriodModel;
+	asteriod.transform = nu::Transform{ nu::Vector2{nu::Randomfloat(1280), nu::Randomfloat(1024)}, 90.0f, 10.0f };
+	asteriod.speed = 100.0f;
+	asteriod.damping = 1.0f;
+	Enemy* aEnemy = new Enemy{ asteriod };
+	m_scene->AddActor(aEnemy);
 }
 
 void SpaceGame::SpawnPlayer()

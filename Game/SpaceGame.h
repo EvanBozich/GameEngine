@@ -29,8 +29,10 @@ public:
 private:
 	void SpawnPlayer();
 	void SpawnEnemy();
+	void SpawnAsteriods();
 	int m_score = 0;
 	int m_lives = 0;
+	int m_health = 0;
 	float m_spawntimer = 0;
 	float m_stateTimer = 0;
 
@@ -44,4 +46,5 @@ private:
 	 nu::Font* m_gameFont = nullptr;
 	 nu::Text* m_livesText = nullptr;
 	 nu::Text* m_scoreText = nullptr;
+	 nu::Text* m_healthText = nullptr;
 };
