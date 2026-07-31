@@ -55,6 +55,10 @@ void SpaceGame::Update(float dt)
 		m_gameState = GameState::StartLevel;
 		break;
 	case GameState::StartLevel:
+		if (m_health == 0)
+		{
+			m_health = 100;
+		}
 		m_scene->RemoveAllActors();
 		SpawnPlayer();
 		m_gameState = GameState::Game;
